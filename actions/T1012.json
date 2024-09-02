@@ -1,0 +1,29 @@
+{
+    "name": "T1012: Query Registry",
+    "description": "Adversaries may interact with the Windows Registry to gather information about the system, configuration, and installed software.",
+    "technique_id": "T1012",
+    "actions": [
+        {
+            "name": "Simply Query Registry",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1012_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

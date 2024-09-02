@@ -1,0 +1,2 @@
+cd ~
+echo "Simulator started, check file created." > simulator_start.txt

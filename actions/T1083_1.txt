@@ -1,0 +1,8 @@
+dir /s c:\ >> {file_name}
+dir /s "c:\Documents and Settings" >> {file_name}
+dir /s "c:\Program Files\" >> {file_name}
+dir "%systemdrive%\Users\*.*" >> {file_name}
+dir "%userprofile%\AppData\Roaming\Microsoft\Windows\Recent\*.*" >> {file_name}
+dir "%userprofile%\Desktop\*.*" >> {file_name}
+tree /F >> {file_name}
+dir c:\

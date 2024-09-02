@@ -1,0 +1,46 @@
+{
+    "name": "T1204.002: User Execution, Malicious File",
+    "description": "An adversary may rely upon a user opening a malicious file in order to gain execution.",
+    "technique_id": "T1204.002",
+    "actions": [
+        {
+            "name": "Run MSFVenom generated payload to get meterpreter session",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1204.002_1.txt",
+            "actions_included": [
+                "T1027: Obfuscated Files or Information"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": true,
+                    "priority": "0",
+                    "script_file": "run_program_linux.json"
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "ip_target",
+                    "value": ""
+                },
+                {
+                    "name": "port",
+                    "value": "4545"
+                },
+                {
+                    "name": "command",
+                    "value": "cd ~; ./start_mfs {ip_attacker} {port} {ip_target}"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "input_arguments": ["file_name", "random_str"],
+    "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "output": null,
+    "read_script_from_file": false,
+    "path_to_file_with_script": null,
+    "script_text": "echo {random_str} > {file_name}"
+}

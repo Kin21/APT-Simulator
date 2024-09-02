@@ -1,0 +1,38 @@
+{
+    "name": "T1021.001: Remote Services: Remote Desktop Protocol",
+    "description": "Adversaries may use Valid Accounts to log into a computer using the Remote Desktop Protocol (RDP). The adversary may then perform actions as the logged-on user.",
+    "technique_id": "T1021.001",
+    "actions": [
+        {
+            "name": "Attempt an RDP session via Remote Desktop Application to a DomainController thourgh first target host",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1021.001_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "ip_target",
+                    "value": "10.0.0.10"
+                }
+            ]
+        }
+    ]
+}

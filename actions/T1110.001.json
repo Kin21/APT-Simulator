@@ -1,0 +1,38 @@
+{
+    "name": "T1110.001: Brute Force, Password Guessing",
+    "description": "Adversaries with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts.",
+    "technique_id": "T1110.001",
+    "actions": [
+        {
+            "name": "RDP brutforce using crackmapexec",
+            "interpreter": "/bin/bash",
+            "commands_file": "T1110.001_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_target",
+                    "value": ""
+                },
+                {
+                    "name": "correct_pass",
+                    "value": "2138"
+                }
+            ]
+        }
+    ]
+}

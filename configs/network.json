@@ -1,0 +1,17 @@
+{
+  "attack_host_ip": "random",
+  "attack_interface_name": "eth0",
+  "target_first_windows_ip": "random",
+  "target_first_windows_interface_name": "Ethernet0",
+  "target_first_linux_ip": "random",
+  "target_first_linux_interface_name": "eth0",
+  "target_later_windows_ad_ip": "10.0.0.10",
+  "target_later_windows_ad_interface_name": "Ethernet0",
+  "router_ip_attack_side": "random",
+  "router_interface_name_attack_side": "ens33",
+  "router_ip_target_side": "10.0.0.1",
+  "router_interface_name_target_side": "ens36",
+  "target_subnet": "10.0.0.0/24",
+  "attacker_subnet": "10.0.100.0/24"
+}
+

@@ -1,0 +1,29 @@
+{
+    "name": "T1113: Screen Capture",
+    "description": "Adversaries may attempt to take screen captures of the desktop to gather information over the course of an operation.",
+    "technique_id": "T1113",
+    "actions": [
+        {
+            "name": "Take screenshot using Metasploit screengrab",
+            "interpreter": "/bin/bash",
+            "commands_file": "T1113_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

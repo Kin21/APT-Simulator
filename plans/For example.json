@@ -1,0 +1,21 @@
+{
+    "name": "For example",
+    "description": "Plan for example.",
+    "actions": [
+        {
+            "technique_id": "T1566.001",
+            "name": "Give remote shell under non-privileged account(run .ps1 => reverse shell)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1016",
+            "name": "System Network Configuration Discovery on Windows",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1110.001",
+            "name": "RDP brutforce using crackmapexec",
+            "target": "TargetLaterMovement"
+        }
+    ]
+}

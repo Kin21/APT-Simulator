@@ -1,0 +1,9 @@
+{
+    "input_arguments": null,
+    "interpreter": null,
+    "dynamic_output": true,
+    "output": {"ip_address":  ""},
+    "read_script_from_file": false,
+    "path_to_file_with_script": null,
+    "script_text": "ip addr add {ip_address} dev eth0\nip link set eth0 up"
+}

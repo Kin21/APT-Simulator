@@ -1,0 +1,2 @@
+cd ~
+ls > boot_test_2.txt

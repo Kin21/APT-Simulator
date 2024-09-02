@@ -1,0 +1,30 @@
+{
+    "name": "T1018: Remote System Discovery",
+    "description": "Adversaries may attempt to get a listing of other systems by IP address, hostname, or other logical identifier on a network that may be used for Lateral Movement from the current system.",
+    "technique_id": "T1018",
+    "actions": [
+        {
+            "name": "List servers in domain Metasploit enum_ad_computers",
+            "interpreter": "/bin/bash",
+            "commands_file": "T1018_1.txt",
+            "actions_included": [
+                "T1087.002: Account Discovery",
+                " Domain Account"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

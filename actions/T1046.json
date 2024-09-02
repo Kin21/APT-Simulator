@@ -1,0 +1,42 @@
+{
+    "name": "T1046: Network Service Discovery",
+    "description": "Adversaries may attempt to get a listing of services running on remote hosts and local network infrastructure devices, including those that may be vulnerable to remote software exploitation.",
+    "technique_id": "T1046",
+    "actions": [
+        {
+            "name": "Run simple Nmap scan",
+            "interpreter": "/bin/bash",
+            "commands_file": "T1046_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_target",
+                    "value": "10.0.0.10"
+                },
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "ip_target",
+                    "value": ""
+                }
+            ]
+        }
+    ]
+}

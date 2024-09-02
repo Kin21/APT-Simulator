@@ -1,0 +1,29 @@
+{
+    "name": "T1543.003",
+    "description": "Adversaries may create or modify Windows services to repeatedly execute malicious payloads as part of persistence.",
+    "technique_id": "T1543.003",
+    "actions": [
+        {
+            "name": "Modify default Fax by changing the binPath to PowerShell to spawn powershell.",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1543.003_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

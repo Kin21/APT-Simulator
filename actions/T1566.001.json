@@ -1,0 +1,42 @@
+{
+    "name": "T1566.001 Phishing: Spearphishing Attachment",
+    "description": "Adversaries may send spearphishing emails with a malicious attachment in an attempt to gain access to victim systems.\nSimulation relies upon User Execution techniques to gain execution",
+    "technique_id": "T1566.001",
+    "actions": [
+        {
+            "name": "Give remote shell under non-privileged account(run .ps1 => reverse shell)",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "not_required.txt",
+            "actions_included": [
+                "T1204.002"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": true,
+                    "priority": "2",
+                    "script_file": "get_reverse_shell_windows.json"
+                },
+                "attacker": {
+                    "required": true,
+                    "priority": "1",
+                    "script_file": "run_simple_remote_handler.json"
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_target",
+                    "value": ""
+                },
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "port",
+                    "value": "9595"
+                }
+            ]
+        }
+    ]
+}

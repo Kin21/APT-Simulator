@@ -1,0 +1,34 @@
+{
+    "name": "T1070.004 Indicator Removal, File Deletion",
+    "description": "Adversaries may delete files left behind by the actions of their intrusion activity. Malware, tools, or other non-native files dropped or created on a system by an adversary (ex: Ingress Tool Transfer) may leave traces to indicate to what was done within a network and how",
+    "technique_id": "T1070.004",
+    "actions": [
+        {
+            "name": "Delete file from privleged \"logs\" folder",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1070.004_1.txt",
+            "actions_included": [
+                "T1027.005: Obfuscated Files or Information: Indicator Removal from Tools"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": true,
+                    "priority": "0",
+                    "script_file": "create_file_on_host.json"
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "file_name",
+                    "value": "C:\\Windows\\Logs\\T1070.004_1_logs.log"
+                }
+            ]
+        }
+    ]
+}

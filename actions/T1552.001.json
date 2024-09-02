@@ -1,0 +1,46 @@
+{
+    "name": "T1552.001 Unsecured Credentials, Credentials In Files",
+    "description": "Adversaries may search local file systems and \nremote file shares for files containing insecurely stored credentials.",
+    "technique_id": "T1552.001",
+    "actions": [
+        {
+            "name": "Extract Browser and System credentials with LaZagne",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1552.001_1.txt",
+            "actions_included": [
+                "T1105"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": true,
+                    "priority": "0",
+                    "script_file": "sent_file.json"
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "ip_target",
+                    "value": ""
+                },
+                {
+                    "name": "local_path",
+                    "value": "payloads/LaZagne.exe"
+                },
+                {
+                    "name": "remote_path",
+                    "value": "/root/LaZagne.exe"
+                }
+            ]
+        }
+    ]
+}

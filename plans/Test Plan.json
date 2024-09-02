@@ -1,0 +1,21 @@
+{
+    "name": "Test Plan",
+    "description": "This is test Plan",
+    "actions": [
+        {
+            "technique_id": "T1083",
+            "name": "File and Directory Discovery (cmd.exe)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1552.001",
+            "name": "Extract Browser and System credentials with LaZagne",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1070.004",
+            "name": "Delete file from privleged \"logs\" folder",
+            "target": "TargetFirstWindows"
+        }
+    ]
+}

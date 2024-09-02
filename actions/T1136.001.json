@@ -1,0 +1,29 @@
+{
+    "name": "T1136.001: Create Account, Local Account",
+    "description": "Adversaries may create a local account to maintain access to victim systems.",
+    "technique_id": "T1136.001",
+    "actions": [
+        {
+            "name": "Create a new local user in PowerShell",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1136.001_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

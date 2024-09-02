@@ -1,0 +1,1 @@
+$Server=10.0.0.10;  $User = Join-Path aptsimulator.lab kk; $Password="ntvggfhjkm212!A"; cmdkey /generic:TERMSRV/$Server /user:$User /pass:$Password;  mstsc /v:$Server;

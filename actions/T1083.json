@@ -1,0 +1,34 @@
+{
+    "name": "T1083 File and Directory Discovery",
+    "description": "Adversaries may enumerate files and directories or may search in specific locations \nof a host or network share for certain information within a file system. ",
+    "technique_id": "T1083",
+    "actions": [
+        {
+            "name": "File and Directory Discovery (cmd.exe)",
+            "interpreter": "C:\\Windows\\System32\\cmd.exe",
+            "commands_file": "T1083_1.txt",
+            "actions_included": [
+                "T1552.001: Credentials In Files"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "file_name",
+                    "value": "T1083_cmd_text.txt"
+                }
+            ]
+        }
+    ]
+}

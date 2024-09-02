@@ -1,0 +1,3 @@
+tasklist
+Get-Process
+get-wmiObject -class Win32_Process

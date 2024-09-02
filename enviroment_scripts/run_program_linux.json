@@ -1,0 +1,10 @@
+{
+    "mode": "recursive_arguments",
+    "input_arguments": ["command", "args"],
+    "interpreter": "/bin/bash",
+    "output": null,
+    "read_script_from_file": false,
+    "path_to_file_with_script": null,
+    "script_text": "nohup /bin/bash -c '{command}' &"
+}
+

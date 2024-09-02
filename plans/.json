@@ -1,0 +1,41 @@
+{
+    "name": "",
+    "description": "",
+    "actions": [
+        {
+            "technique_id": "T1566.001",
+            "name": "Give remote shell under non-privileged account(run .ps1 => reverse shell)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1083",
+            "name": "File and Directory Discovery (cmd.exe)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1552.001",
+            "name": "Extract Browser and System credentials with LaZagne",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1003.001",
+            "name": "Dump LSASS.exe Memory using ProcDump",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1003.001",
+            "name": "Mimikatz.exe logonpasswords",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1003.005",
+            "name": "List credentials currently stored on the host via the built-in Windows utility cmdkey.exe",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1070.004",
+            "name": "Delete file from privleged \"logs\" folder",
+            "target": "TargetFirstWindows"
+        }
+    ]
+}

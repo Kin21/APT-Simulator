@@ -1,0 +1,29 @@
+{
+    "name": "T1574.002: Hijack Execution Flow: DLL Side-Loading",
+    "description": "Adversaries may execute their own malicious payloads by side-loading DLLs. ",
+    "technique_id": "T1574.002",
+    "actions": [
+        {
+            "name": "DLL Side-Loading using the dotnet startup hook environment variable through meterpreter session",
+            "interpreter": "/bin/bash",
+            "commands_file": "T1574.002_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

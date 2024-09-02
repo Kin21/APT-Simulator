@@ -1,0 +1,1 @@
+tmux send-keys -t metasploit_handler 'sessions -s post/windows/gather/tcpnetstat' C-m

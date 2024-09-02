@@ -1,0 +1,4 @@
+net localgroup
+net localgroup "Administrators"
+get-localgroup
+Get-LocalGroupMember -Name "Administrators"

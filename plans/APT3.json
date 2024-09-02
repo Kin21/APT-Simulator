@@ -1,0 +1,156 @@
+{
+    "name": "APT3",
+    "description": "APT3 Simulation Plan",
+    "actions": [
+        {
+            "technique_id": "T1046",
+            "name": "Run simple Nmap scan",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1566.001",
+            "name": "Give remote shell under non-privileged account(run .ps1 => reverse shell)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1016",
+            "name": "System Network Configuration Discovery on Windows",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1057",
+            "name": "Process Discovery - tasklist,Get-Process",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1083",
+            "name": "File and Directory Discovery (cmd.exe)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1069.001",
+            "name": "Local Permission Groups Discovery",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1552.001",
+            "name": "Extract Browser and System credentials with LaZagne",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1003.001",
+            "name": "Dump LSASS.exe Memory using ProcDump",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1003.001",
+            "name": "Mimikatz.exe logonpasswords",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1056.001",
+            "name": "Run keylogger script in background",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1003.005",
+            "name": "List credentials currently stored on the host via the built-in Windows utility cmdkey.exe",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1070.004",
+            "name": "Delete file from privleged \"logs\" folder",
+            "target": "TargetFirstWindows"
+        },
+         {
+            "technique_id": "T1204.002",
+            "name": "Run MSFVenom generated payload to get meterpreter session",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1574.002",
+            "name": "DLL Side-Loading using the dotnet startup hook environment variable through meterpreter session",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1018",
+            "name": "List servers in domain Metasploit enum_ad_computers",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1049",
+            "name": "List TCP connections Metasploit post tcpnetstat",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1049",
+            "name": "Enumerate Domain Controllers",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1110.001",
+            "name": "RDP brutforce using crackmapexec",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1135",
+            "name": "SMB discovery using crackmapexec",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1021.001",
+            "name": "Attempt an RDP session via Remote Desktop Application to a DomainController thourgh first target host",
+            "target": "TargetLaterMovement"
+        },
+        {
+            "technique_id": "T1136.001",
+            "name": "Create a new local user in PowerShell",
+            "target": "TargetLaterMovement"
+        },
+        {
+            "technique_id": "T1053.005",
+            "name": "Add binary to run on startup",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1136.001",
+            "name": "Create a new local user in PowerShell",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1112",
+            "name": "Modify Registry under current user",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1543.003",
+            "name": "Modify default Fax by changing the binPath to PowerShell to spawn powershell.",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1113",
+            "name": "Take screenshot using Metasploit screengrab",
+            "target": "Attacker"
+        },
+        {
+            "technique_id": "T1012",
+            "name": "Simply Query Registry",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1005",
+            "name": "Search files of interest and save them to a single zip file and exfiltrate",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1547",
+            "name": "Install a driver via pnputil.exe",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1218.011",
+            "name": "Run malicous dll using Rundll32",
+            "target": "TargetFirstWindows"
+        }
+    ]
+}

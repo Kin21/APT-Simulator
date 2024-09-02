@@ -1,0 +1,24 @@
+{
+  "Hosts": [
+    {
+      "type": "Attacker",
+      "vm_path": "E:\\VirtualMachines\\Kali\\KaliMain.vmx",
+      "platform": "LinuxGeneric"
+    },
+    {
+      "type": "TargetFirstWindows",
+      "vm_path": "G:\\VMs\\win\\Windows10x64.vmx",
+      "platform": "WindowsGeneric"
+    },
+    {
+      "type": "TransparentRouter",
+      "vm_path": "F:\\VMs\\Debian\\Debian 11.x 64-bit.vmx",
+      "platform": "LinuxGeneric"
+    },
+    {
+      "type": "TargetLaterMovement",
+      "vm_path": "G:\\VMs\\WinServer\\Windows Server 2022.vmx",
+      "platform": "WindowsAD"
+    }
+  ]
+}

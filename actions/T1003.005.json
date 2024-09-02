@@ -1,0 +1,29 @@
+{
+    "name": "T1003.005: OS Credential Dumping, Cached Domain Credentials",
+    "description": "Adversaries may attempt to access cached domain credentials used to allow authentication to occur in the event a domain controller is unavailable.",
+    "technique_id": "T1003.005",
+    "actions": [
+        {
+            "name": "List credentials currently stored on the host via the built-in Windows utility cmdkey.exe",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1003.005_1.txt",
+            "actions_included": [
+                "T1059.001: Command and Scripting Interpreter, PowerShell"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

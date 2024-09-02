@@ -1,0 +1,4 @@
+crackmapexec smb 10.0.0.10
+crackmapexec smb -u '' -p '' 10.0.0.10
+crackmapexec smb -u 'root' -p '' 10.0.0.10
+hydra -l root -P pass.list smb://10.0.0.10

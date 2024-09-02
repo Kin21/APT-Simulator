@@ -1,0 +1,29 @@
+{
+    "name": "T1069.001: Permission Groups Discovery: Local Groups",
+    "description": "Adversaries may attempt to find local system groups and permission settings. ",
+    "technique_id": "T1069.001",
+    "actions": [
+        {
+            "name": "Local Permission Groups Discovery",
+            "interpreter": "",
+            "commands_file": "T1069.001_1.txt",
+            "actions_included": [
+                "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

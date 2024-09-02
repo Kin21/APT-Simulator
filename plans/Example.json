@@ -1,0 +1,21 @@
+{
+    "name": "Example",
+    "description": "Just for example.",
+    "actions": [
+        {
+            "technique_id": "T1566.001",
+            "name": "Give remote shell under non-privileged account(run .ps1 => reverse shell)",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1005",
+            "name": "Search files of interest and save them to a single zip file and exfiltrate",
+            "target": "TargetFirstWindows"
+        },
+        {
+            "technique_id": "T1110.001",
+            "name": "RDP brutforce using crackmapexec",
+            "target": "TargetLaterMovement"
+        }
+    ]
+}

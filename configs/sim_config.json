@@ -1,0 +1,89 @@
+{
+  "on_start": [
+        {
+          "script": "enviroment_scripts/simply_sent_file.json",
+          "target": "TargetFirstWindows",
+          "args": {
+            "local_path":"payloads/RegistryChangesView.exe",
+            "remote_path": "C:\\Users\\root\\AppData\\Local\\Temp\\RegistryChangesView.exe"
+          }
+        },
+      {
+        "script": "enviroment_scripts/run_program_windows.json",
+        "target": "TargetFirstWindows",
+        "args": {
+          "command": "C:\\Users\\root\\AppData\\Local\\Temp\\RegistryChangesView.exe /CreateSnapshot C:\\Users\\root\\AppData\\Local\\Temp\\reg_snapshot_pre_sim"
+        }
+      },
+      {
+        "script": "enviroment_scripts/run_program_linux.json",
+        "target": "Attacker",
+        "args": {
+          "command": "tcpdump -i {ip_interface_attacker} -n -w /root/net_capture.pcap"
+        }
+      },
+    {
+          "script": "enviroment_scripts/simply_sent_file.json",
+          "target": "TargetFirstWindows",
+          "args": {
+            "local_path":"payloads/Procmon64.exe",
+            "remote_path": "C:\\Users\\root\\AppData\\Local\\Temp\\Procmon64.exe"
+          }
+    },
+    {
+        "script": "enviroment_scripts/run_program_windows.json",
+        "target": "TargetFirstWindows",
+        "args": {
+          "command": "C:\\Users\\root\\AppData\\Local\\Temp\\Procmon64.exe /AcceptEula /Quiet /NoFilter /Backingfile C:\\Users\\root\\AppData\\Local\\Temp\\procmon_log"
+        }
+      }
+  ],
+  "on_end": [
+      {
+        "script": "enviroment_scripts/run_program_linux.json",
+        "target": "Attacker",
+        "args": {
+          "command": "kill -2 $(ps -e | pgrep tcpdump)"
+        }
+      },
+      {
+        "script": "enviroment_scripts/get_file.json",
+        "target": "Attacker",
+        "args": {
+          "remote_path": "/root/net_capture.pcap",
+          "local_path": "{results_folder}/net_capture.pcap"
+        }
+      },
+      {
+        "script": "enviroment_scripts/run_program_windows.json",
+        "target": "TargetFirstWindows",
+        "args": {
+          "command": "C:\\Users\\root\\AppData\\Local\\Temp\\RegistryChangesView.exe  /DataSourceDirection 1 /DataSourceType1 2 /DataSourceType2 1 /RegSnapshotPath1 \"C:\\Users\\root\\AppData\\Local\\Temp\\reg_snapshot_pre_sim\" /stext \"C:\\Users\\root\\AppData\\Local\\Temp\\reg_compare.txt\""
+        }
+      },
+      {
+          "script": "enviroment_scripts/run_program_windows.json",
+          "target": "TargetFirstWindows",
+          "args": {
+            "command": "C:\\Users\\root\\AppData\\Local\\Temp\\Procmon64.exe /AcceptEula /Terminate"
+          }
+      },
+      {
+        "script": "enviroment_scripts/get_file.json",
+        "target": "TargetFirstWindows",
+        "args": {
+          "remote_path": "C:\\Users\\root\\AppData\\Local\\Temp\\reg_compare.txt",
+          "local_path": "{results_folder}/reg_compare.txt"
+        }
+      },
+      {
+        "script": "enviroment_scripts/get_file.json",
+        "target": "TargetFirstWindows",
+        "args": {
+          "remote_path": "C:\\Users\\root\\AppData\\Local\\Temp\\procmon_log.PML",
+          "local_path": "{results_folder}/procmon_log.PML"
+        }
+      }
+
+  ]
+}

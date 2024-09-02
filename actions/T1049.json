@@ -1,0 +1,65 @@
+{
+    "name": "T1049: System Network Connections Discovery",
+    "description": "Adversaries may attempt to get a listing of network connections to or from the compromised system they are currently accessing or from remote systems by querying for information over the network.",
+    "technique_id": "T1049",
+    "actions": [
+        {
+            "name": "List TCP connections Metasploit post tcpnetstat",
+            "interpreter": "/bin/bash",
+            "commands_file": "T1049_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "ip_target",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "name": "Enumerate Domain Controllers",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1049_2.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                }
+            ]
+        }
+    ]
+}

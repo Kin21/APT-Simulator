@@ -1,0 +1,9 @@
+{
+    "input_arguments": ["ip_address", "interface_name"],
+    "interpreter": "/bin/bash",
+    "output": null,
+    "read_script_from_file": false,
+    "path_to_file_with_script": null,
+    "script_text": "ip addr flush dev {interface_name}\nip addr add {ip_address}/24 dev {interface_name}\nip link set {interface_name} up\nsystemctl restart networking"
+}
+

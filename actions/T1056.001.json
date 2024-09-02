@@ -1,0 +1,42 @@
+{
+    "name": "T1056.001: Input Capture: Keylogging",
+    "description": "Adversaries may log user keystrokes to intercept credentials as the user types them.",
+    "technique_id": "T1056.001",
+    "actions": [
+        {
+            "name": "Run keylogger script in background",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1056.001_1.txt",
+            "actions_included": [
+                "T1105: Ingress Tool Transfer"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": true,
+                    "priority": "0",
+                    "script_file": "sent_file.json"
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "local_path",
+                    "value": "payloads/Get-Keystrokes.ps1"
+                },
+                {
+                    "name": "remote_path",
+                    "value": "/root/Get-Keystrokes.ps1"
+                }
+            ]
+        }
+    ]
+}

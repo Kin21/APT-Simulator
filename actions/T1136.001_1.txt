@@ -1,0 +1,1 @@
+New-LocalUser -Name "test_user_t1136" -NoPassword

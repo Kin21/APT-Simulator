@@ -1,0 +1,29 @@
+{
+    "name": "T1057: Process Discovery",
+    "description": "Adversaries may attempt to get information about running processes on a system.",
+    "technique_id": "T1057",
+    "actions": [
+        {
+            "name": "Process Discovery - tasklist,Get-Process",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1057_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

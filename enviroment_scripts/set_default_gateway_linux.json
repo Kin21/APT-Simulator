@@ -1,0 +1,8 @@
+{
+    "input_arguments": ["ip_address"],
+    "interpreter": "/bin/bash",
+    "output": null,
+    "read_script_from_file": false,
+    "path_to_file_with_script": null,
+    "script_text": "ip route add default via {ip_address}\nsystemctl restart networking"
+}

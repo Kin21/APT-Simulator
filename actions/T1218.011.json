@@ -1,0 +1,46 @@
+{
+    "name": "T1218.011: System Binary Proxy Execution: Rundll32",
+    "description": "Adversaries may abuse rundll32.exe to proxy execution of malicious code.",
+    "technique_id": "T1218.011",
+    "actions": [
+        {
+            "name": "Run malicous dll using Rundll32",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1218.011_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": true,
+                    "priority": "0",
+                    "script_file": "sent_file.json"
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                },
+                {
+                    "name": "ip_target",
+                    "value": ""
+                },
+                {
+                    "name": "remote_path",
+                    "value": "/root/T1218_011.dll"
+                },
+                {
+                    "name": "local_path",
+                    "value": "payloads/T1218_011.dll"
+                }
+            ]
+        }
+    ]
+}

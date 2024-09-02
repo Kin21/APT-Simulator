@@ -1,0 +1,9 @@
+{
+    "input_arguments": ["ip_attacker","ip_target","port"],
+    "interpreter": "/bin/bash",
+    "output": null,
+    "read_script_from_file": true,
+    "path_to_file_with_script": "enviroment_scripts/run_simple_remote_handler.txt",
+    "script_text": null
+}
+

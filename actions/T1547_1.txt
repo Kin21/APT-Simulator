@@ -1,0 +1,1 @@
+pnputil.exe /add-driver "C:\Windows\INF\usbstor.inf"

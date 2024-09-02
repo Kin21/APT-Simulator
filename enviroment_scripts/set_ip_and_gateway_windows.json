@@ -1,0 +1,9 @@
+{
+    "input_arguments": ["ip_address", "interface_name","gateway"],
+    "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "output": null,
+    "read_script_from_file": true,
+    "path_to_file_with_script": "enviroment_scripts/set_ip_and_gateway_windows.ps1",
+    "script_text": null
+}
+

@@ -1,0 +1,29 @@
+{
+    "name": "T1136.002: Create Account, Domain Account",
+    "description": "Adversaries may create a domain account to maintain access to victim systems.",
+    "technique_id": "T1136.002",
+    "actions": [
+        {
+            "name": "Create a new Windows domain admin user",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1136.002_1.txt",
+            "actions_included": [
+                ""
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": []
+        }
+    ]
+}

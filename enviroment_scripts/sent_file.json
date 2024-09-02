@@ -1,0 +1,9 @@
+{
+  "mode": "sent_file",
+  "input_arguments": null,
+  "interpreter": "/bin/bash",
+  "output": null,
+  "read_script_from_file": false,
+  "path_to_file_with_script": null,
+  "script_text": "nohup /bin/bash -c 'cd ~ && python -m http.server 80' &"
+}

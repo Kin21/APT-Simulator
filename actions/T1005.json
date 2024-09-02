@@ -1,0 +1,35 @@
+{
+    "name": "T1005: Data from Local System",
+    "description": "Adversaries may search local system sources, such as file systems and configuration files or local databases, to find files of interest and sensitive data prior to Exfiltration.",
+    "technique_id": "T1005",
+    "actions": [
+        {
+            "name": "Search files of interest and save them to a single zip file and exfiltrate",
+            "interpreter": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "commands_file": "T1005_1.txt",
+            "actions_included": [
+                "T1048.003: Exfiltration Over Alternative Protocol, Exfiltration Over Unencrypted Non-C2 Protocol",
+                "T1001: Data Obfuscation"
+            ],
+            "platform": "windows",
+            "set_up": {
+                "target": {
+                    "required": false,
+                    "priority": "1",
+                    "script_file": ""
+                },
+                "attacker": {
+                    "required": false,
+                    "priority": "0",
+                    "script_file": ""
+                }
+            },
+            "input_args": [
+                {
+                    "name": "ip_attacker",
+                    "value": ""
+                }
+            ]
+        }
+    ]
+}
